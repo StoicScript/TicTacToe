@@ -28,6 +28,10 @@ const Gameboard = (() => {
             elem.classList.remove('used')
             playerChoicesArr.length = 0
         })
+        selectionBtn.forEach(function(btn){
+            btn.classList.remove('clicked')
+        })
+        player1 = undefined
     })
 
     return {
@@ -46,14 +50,18 @@ const Game = (() => {
 
     selectionBtn.forEach(function(btn){
         btn.addEventListener('click', function(){
-            player1 = PlayerMaker(btn.innerHTML)
-            if(player1.letterSelection == 'X'){
-                player2 = PlayerMaker('O')
-            } else {
-                player2 = PlayerMaker('X')
+            if(player1 == undefined){
+                player1 = PlayerMaker(btn.innerHTML)
+                btn.classList.add('clicked')
+                if(player1.letterSelection == 'X'){
+                    player2 = PlayerMaker('O')
+                } else {
+                    player2 = PlayerMaker('X')
+                }
             }
         })
     })
+
 
     square.forEach(function(elem){
         elem.addEventListener('click', function(){
@@ -122,15 +130,16 @@ const Game = (() => {
 })()
 
 
+// Winning Combos 
 
-0,3,6
-0,1,2
-0,4,8
+// 0,3,6
+// 0,1,2
+// 0,4,8
 
-1,4,7
+// 1,4,7
 
-2,5,8
-2,4,6
+// 2,5,8
+// 2,4,6
 
-3,4,5
-6,7,8
+// 3,4,5
+// 6,7,8

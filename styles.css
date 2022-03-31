@@ -31,3 +31,22 @@ body {
   .box:hover{
     background: rgb(20, 20, 20);
   }
+
+  .selection-btn{
+      font-size: 20px;
+      padding: 20px;
+      color: white;
+      background-color: black;
+      border: 2px solid white;
+      cursor: pointer;
+  }
+
+  .selection-btn:hover{
+    border: 3px solid white;
+  }
+
+  .selection-btn.clicked{
+    font-size: 20px;
+    border: 5px solid white;
+
+  }
