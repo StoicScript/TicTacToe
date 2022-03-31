@@ -1,0 +1,33 @@
+body {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+
+}
+
+.game-board {
+    display: grid;
+    justify-content: center;
+    grid-gap: 5px;
+    grid-template-rows: 150px 150px 150px;
+    grid-template-columns: 150px 150px 150px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.box {
+    background: rgb(0, 0, 0);
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    font-size: 90px;
+    font-weight: bold;
+  }
+
+  .box:hover{
+    background: rgb(20, 20, 20);
+  }
