@@ -1,5 +1,3 @@
-console.log('tits')
-
 const selectionBtn = document.querySelectorAll('.selection-btn')
 const square = document.querySelectorAll('.box')
 
@@ -13,16 +11,22 @@ const box6 = document.getElementById('box6')
 const box7 = document.getElementById('box7')
 const box8 = document.getElementById('box8')
 
+const modal = document.getElementById('modal')
+const closeBtn = document.getElementById('close')
+const overlay = document.getElementById('overlay')
+const modalText = document.getElementById('modal-text')
+
 let player1
 let player2
-
 
 const Gameboard = (() => {
 
     let playerChoicesArr = []
 
     const restart = document.getElementById('restart');
-    restart.addEventListener('click', function(){
+    restart.addEventListener('click', resetGame)
+
+    function resetGame() {
         square.forEach(function(elem){
             elem.innerHTML = '';
             elem.classList.remove('used')
@@ -31,11 +35,21 @@ const Gameboard = (() => {
         selectionBtn.forEach(function(btn){
             btn.classList.remove('clicked')
         })
-        player1 = undefined
+        player1 = undefined;
+        square.forEach(function(elem){
+            elem.classList.remove('ready')
+        })
+    }
+
+    closeBtn.addEventListener('click', () =>{
+        modal.classList.toggle('active')
+        overlay.classList.toggle('active')
+        Gameboard.resetGame();
+        console.log('clicky')
     })
 
     return {
-        playerChoicesArr,
+        playerChoicesArr, resetGame
     }
 })();
 
@@ -53,6 +67,9 @@ const Game = (() => {
             if(player1 == undefined){
                 player1 = PlayerMaker(btn.innerHTML)
                 btn.classList.add('clicked')
+                square.forEach(function(elem){
+                    elem.classList.add('ready')
+                })
                 if(player1.letterSelection == 'X'){
                     player2 = PlayerMaker('O')
                 } else {
@@ -61,7 +78,6 @@ const Game = (() => {
             }
         })
     })
-
 
     square.forEach(function(elem){
         elem.addEventListener('click', function(){
@@ -118,12 +134,20 @@ const Game = (() => {
         }
 
         if (Gameboard.playerChoicesArr.length == 9 && winner == ''){
-            alert('draw')
+            modal.classList.toggle('active')
+            overlay.classList.toggle('active')
+            modalText.innerHTML = 'Tie Game!'
         } else if (winner !== ''){
+           setTimeout(announceWinner,250)
+        }
+
+        function announceWinner(){
+            modal.classList.toggle('active')
+            overlay.classList.toggle('active')
             if(winner == player1.letterSelection){
-                alert('Player 1 wins')
+                modalText.innerHTML = 'Player 1 wins!'
             } else {
-               alert('Player 2 wins')
+                modalText.innerHTML = 'Player 2 wins!'
             }
         }
     }
