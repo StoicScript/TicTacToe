@@ -68,7 +68,7 @@ body {
   .selection-btn.clicked{
     transform: translate(-3px,3px);
     box-shadow: none;
-    transition-duration: 0.25ss;
+    transition-duration: 0.25s;
 
   }
 
